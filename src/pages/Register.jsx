@@ -1,0 +1,179 @@
+ import React, { useContext, useEffect, useState } from "react";
+ import { Link, NavLink, useNavigate } from "react-router";
+
+ import { FaGoogle } from "react-icons/fa6";
+ import toast from "react-hot-toast";
+ 
+ import { FaEye } from "react-icons/fa";
+ import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
+
+ const Register = () => {
+   const [show, setShow] = useState(false);
+   const { createUser, updateUserProfile, signInWithGoogle } =
+     useContext(AuthContext);
+   const navigate = useNavigate();
+
+   useEffect(() => {
+     document.title = "Register | E-Learn";
+   }, []);
+
+   const handleRegister = async (event) => {
+     event.preventDefault();
+     const displayName = event.target.displayName.value; 
+     const email = event.target.email.value;
+     const password = event.target.password.value;
+     const photoURL = event.target.photoURL;
+     const file = photoURL.files[0]
+
+     
+     console.log(file)
+ 
+
+
+     const regExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+     if (!regExp.test(password)) {
+       toast.error(
+         "Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter"
+       );
+       return;
+     }
+
+     toast.loading("Creating user...", { id: "create-user" });
+
+     const res = await axios.post(
+       `https://api.imgbb.com/1/upload?key=a48566e9267586b35577a0d37ff997f3`, { image: file }, {
+         headers: {
+           'Content-Type': 'multipart/form-data'
+         }
+     });
+     
+ 
+ 
+
+     const mainPhotoURL = res.data.data.display_url
+
+
+     const formData = {
+       displayName,
+       email,
+       password,
+       mainPhotoURL,
+     };
+
+
+     if (res.data.success == true) {
+            createUser(email, password)
+       .then((result) => {
+         console.log(result.user);
+         updateUserProfile(displayName, mainPhotoURL);
+         
+         toast.success("User created successfully!", { id: "create-user" });
+
+         axios.post("http://localhost:5000/users", formData)
+           .then(res => {
+           console.log(res.data)
+           })
+           .catch(error => {
+           console.log(error)
+         })
+        //  navigate("/");
+       })
+       .catch((error) => {
+         // console.log(error);
+         toast.error(error.message, { id: "create-user" });
+       });
+     }
+ 
+
+
+   };
+
+   const handleGoogleSignIn = () => {
+     toast.loading("Creating user...", { id: "create-user" });
+     signInWithGoogle()
+       .then((result) => {
+         toast.success("User created successfully!", { id: "create-user" });
+        //  console.log(result.user);
+         navigate("/");
+       })
+       .catch((error) => {
+         // console.log(error);
+         toast.error(error.message, { id: "create-user" });
+       });
+   };
+
+   return (
+     <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl mt-12">
+       <div className="card-body">
+         <h1 className="text-3xl font-bold text-center">Register</h1>
+         <form onSubmit={handleRegister}>
+           <fieldset className="fieldset">
+             <label className="label">Name</label>
+             <input
+               type="text"
+               name="displayName"
+               className="input rounded-full focus:border-0 focus:outline-gray-200"
+               placeholder="Name"
+             />
+
+             <label className="label">PhotoURL</label>
+             <input
+               type="file"
+               name="photoURL"
+               className="input rounded-full focus:border-0 focus:outline-gray-200"
+               placeholder="Photo URL"
+             />
+
+             <label className="label">Email</label>
+             <input
+               type="email"
+               name="email"
+               className="input rounded-full focus:border-0 focus:outline-gray-200"
+               placeholder="Email"
+             />
+
+             <div className="relative">
+               <label className="label">Password</label>
+               <input
+                 type={show ? "text" : "password"}
+                 name="password"
+                 className="input rounded-full focus:border-0 focus:outline-gray-200"
+                 placeholder="Password"
+               />
+
+               <span
+                 onClick={() => setShow(!show)}
+                 className="absolute right-[25px] top-[30px] cursor-pointer z-50"
+               >
+                 {show ? <FaEye size={18} /> : <IoEyeOff size={18} />}
+               </span>
+             </div>
+
+             <button className="btn button  text-black  mt-4 rounded-full ">
+               Register
+             </button>
+           </fieldset>
+         </form>
+
+         <button
+           onClick={handleGoogleSignIn}
+           className="btn button bg-white rounded-full text-black border-[#e5e5e5]"
+         >
+           <FaGoogle />
+           Login with Google
+         </button>
+         <p className="text-center">
+           Already have an account? Please{" "}
+           <Link className="text-blue-500 hover:text-blue-800" to="/auth/login">
+             Login
+           </Link>{" "}
+         </p>
+       </div>
+     </div>
+   );
+ };
+
+ export default Register;
