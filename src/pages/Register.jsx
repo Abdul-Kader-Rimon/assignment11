@@ -26,7 +26,7 @@ import axios from "axios";
        .then(res => {
         setDistricts(res.data.districts)
      })
-   })
+   },[])
 
  
 
