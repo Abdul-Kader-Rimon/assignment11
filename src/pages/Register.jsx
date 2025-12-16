@@ -1,7 +1,7 @@
  import React, { useContext, useEffect, useState } from "react";
  import { Link, NavLink, useNavigate } from "react-router";
 
- import { FaGoogle } from "react-icons/fa6";
+ 
  import toast from "react-hot-toast";
  
  import { FaEye } from "react-icons/fa";
@@ -11,13 +11,28 @@ import axios from "axios";
 
  const Register = () => {
    const [show, setShow] = useState(false);
-   const { createUser, updateUserProfile, signInWithGoogle } =
-     useContext(AuthContext);
-   const navigate = useNavigate();
+   const { createUser, updateUserProfile } = useContext(AuthContext);
+   const [upazilas, setUpazilas] = useState([]);
+   const [upazila, setUpazila] = useState('');
+   const [districts, setDistricts] = useState([]);
+   const [district, setDistrict] = useState('');
 
    useEffect(() => {
-     document.title = "Register | E-Learn";
-   }, []);
+     axios.get('/upazila.json')
+       .then(res => {
+       setUpazilas(res.data.upazilas)
+     })
+     axios.get('/district.json')
+       .then(res => {
+        setDistricts(res.data.districts)
+     })
+   })
+
+ 
+
+  //  const navigate = useNavigate();
+
+ 
 
    const handleRegister = async (event) => {
      event.preventDefault();
@@ -26,11 +41,7 @@ import axios from "axios";
      const password = event.target.password.value;
      const photoURL = event.target.photoURL;
      const file = photoURL.files[0]
-
-     
-     console.log(file)
- 
-
+     const blood = event.target.blood.value;
 
      const regExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
@@ -61,7 +72,12 @@ import axios from "axios";
        email,
        password,
        mainPhotoURL,
+       blood,
+       district,
+       upazila,
      };
+
+ 
 
 
      if (res.data.success == true) {
@@ -91,19 +107,7 @@ import axios from "axios";
 
    };
 
-   const handleGoogleSignIn = () => {
-     toast.loading("Creating user...", { id: "create-user" });
-     signInWithGoogle()
-       .then((result) => {
-         toast.success("User created successfully!", { id: "create-user" });
-        //  console.log(result.user);
-         navigate("/");
-       })
-       .catch((error) => {
-         // console.log(error);
-         toast.error(error.message, { id: "create-user" });
-       });
-   };
+  
 
    return (
      <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl mt-12">
@@ -119,14 +123,6 @@ import axios from "axios";
                placeholder="Name"
              />
 
-             <label className="label">PhotoURL</label>
-             <input
-               type="file"
-               name="photoURL"
-               className="input rounded-full focus:border-0 focus:outline-gray-200"
-               placeholder="Photo URL"
-             />
-
              <label className="label">Email</label>
              <input
                type="email"
@@ -134,6 +130,63 @@ import axios from "axios";
                className="input rounded-full focus:border-0 focus:outline-gray-200"
                placeholder="Email"
              />
+
+             <label className="label">PhotoURL</label>
+             <input
+               type="file"
+               name="photoURL"
+               className="input rounded-full focus:border-0 focus:outline-gray-200"
+               placeholder="Photo URL"
+             />
+             <label className="label">Blood Group</label>
+             <select
+               name="blood"
+               
+               className="select rounded-full"
+             >
+               <option disabled selected value="">
+                 Select Blood Group
+               </option>
+               <option value="A+">A+</option>
+               <option value="A-">A-</option>
+               <option value="B+">B+</option>
+               <option value="B-">B-</option>
+               <option value="AB+">AB+</option>
+               <option value="AB-">AB-</option>
+               <option value="O+">O+</option>
+               <option value="O-">O-</option>
+             </select>
+
+             <label className="label">District</label>
+             <select
+               value={district}
+               onChange={(e) => setDistrict(e.target.value)}
+               className="select rounded-full"
+             >
+               <option disabled selected value="">
+                 Select Your District
+               </option>
+               {districts.map((d) => (
+                 <option value={d?.name} key={d.id}>
+                   {d.name}
+                 </option>
+               ))}
+             </select>
+             <label className="label">Upazila</label>
+             <select
+               value={upazila}
+               onChange={(e) => setUpazila(e.target.value)}
+               className="select rounded-full"
+             >
+               <option disabled selected value="">
+                 Select Your Upazila
+               </option>
+               {upazilas.map((u) => (
+                 <option value={u?.name} key={u.id}>
+                   {u.name}
+                 </option>
+               ))}
+             </select>
 
              <div className="relative">
                <label className="label">Password</label>
@@ -158,13 +211,13 @@ import axios from "axios";
            </fieldset>
          </form>
 
-         <button
+         {/* <button
            onClick={handleGoogleSignIn}
            className="btn button bg-white rounded-full text-black border-[#e5e5e5]"
          >
            <FaGoogle />
            Login with Google
-         </button>
+         </button> */}
          <p className="text-center">
            Already have an account? Please{" "}
            <Link className="text-blue-500 hover:text-blue-800" to="/auth/login">

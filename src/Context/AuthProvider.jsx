@@ -19,8 +19,9 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState('');
-
+  const [roleLoading , setRoleLoading] = useState(true)
   const [loading, setLoading] = useState(true);
+  const [userStatus , setUserStatus]= useState('')
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -74,10 +75,12 @@ const AuthProvider = ({ children }) => {
         .get(`http://localhost:5000/users/role/${user.email}`)
         .then((res) => {
           setRole(res.data.role);
+          setUserStatus(res.data.status)
+          setRoleLoading(false)
         });
     }, [user]);
   
-  console.log(role)
+  // console.log(role)
 
   const authInfo = {
     createUser,
@@ -88,6 +91,9 @@ const AuthProvider = ({ children }) => {
     sendPassResetEmailFunc,
     user,
     loading,
+    role,
+    roleLoading,
+    userStatus,
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };

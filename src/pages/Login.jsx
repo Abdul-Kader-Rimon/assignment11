@@ -10,7 +10,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+  const { signInUser  } = useContext(AuthContext);
   useEffect(() => {
     document.title = "Login";
   }, []);
@@ -46,18 +46,7 @@ const Login = () => {
       });
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithGoogle()
-      .then((result) => {
-        // console.log(result.user);
-        toast.success(" Login successfully!", { id: "create-user" });
-        navigate(location?.state || "/");
-      })
-      .catch((error) => {
-        // console.log(error);
-        toast.error(error.message);
-      });
-  };
+ 
 
   return (
     <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border mt-12 border-gray-200">
@@ -91,7 +80,7 @@ const Login = () => {
               </span>
             </div>
             <div>
-              <NavLink to={"/auth/forgetpassword"} className="link link-hover">
+              <NavLink to={"/forgetpassword"} className="link link-hover">
                 Forgot password?
               </NavLink>
             </div>
@@ -101,18 +90,12 @@ const Login = () => {
           </fieldset>
         </form>
 
-        <button
-          onClick={handleGoogleSignIn}
-          className="button btn bg-white rounded-full text-black border-[#e5e5e5]"
-        >
-          <FaGoogle />
-          Login with Google
-        </button>
+ 
         <p className="text-center">
           New to our website? Please{" "}
           <Link
             className="text-blue-500 hover:text-blue-800"
-            to="/auth/register"
+            to="/register"
           >
             Register
           </Link>
