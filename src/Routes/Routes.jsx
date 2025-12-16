@@ -9,6 +9,8 @@ import AddRequest from "../pages/Dashboard/AddRequest/AddRequest";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
 import MyRequest from "../pages/Dashboard/MyRequest/MyRequest";
+import Donate from "../pages/Donate/Donate";
+import PaymentSuccess from "../pages/PaymentSucces/PaymentSuccess";
  
 
 
@@ -29,12 +31,24 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      {
+        path: "/donate",
+        element: <Donate />,
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess />,
+      },
     ],
   },
 
   {
     path: "dashboard",
-    element: <PrivateRoute><DashboardLayOut /></PrivateRoute> ,
+    element: (
+      <PrivateRoute>
+        <DashboardLayOut />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
