@@ -121,6 +121,15 @@ const AllUsers = () => {
                        Donor
                     </button>
                   )}
+
+                  {user?.role !== "admin" && (
+                    <button
+                      onClick={() => handleRoleChange(user?.email, "admin")}
+                      className="btn btn-primary btn-xs ml-5"
+                    >
+                       Admin
+                    </button>
+                  )}
                 </th>
               </tr>
             ))}
