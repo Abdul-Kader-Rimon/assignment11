@@ -95,7 +95,7 @@ const ProfilePage = () => {
       <div>
         <div className="p-6 max-w-2xl mx-auto space-y-6">
           <form className="bg-white shadow rounded-lg p-6 space-y-4">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center justify-center space-x-4">
               <img
                 src={profile.avatar || "/default-avatar.png"}
                 alt="avatar"

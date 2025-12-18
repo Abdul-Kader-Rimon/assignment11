@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../Context/AuthContext';
 import { FaMoneyBillWave, FaTint, FaUsers } from 'react-icons/fa';
+import DonationRequest from '../../Donor/DonationRequest';
+import { Link } from 'react-router';
 
 const MainDashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -73,12 +75,13 @@ const MainDashboard = () => {
 
     return (
       <div className="p-6 space-y-6">
- 
         <div className="bg-blue-500 text-white p-6 rounded-lg shadow-md w-4/6 mx-auto">
           <h1 className="text-2xl font-bold text-center">
-            {userRole === "admin" && "Welcome to Admin Dashboard"}
+            {userRole === "admin" && " Welcome to Admin Dashboard"}
             {userRole === "volunteer" && "Welcome Volunteer"}
-            {userRole === "donor" && "Welcome Donor"}
+          </h1>
+          <h1 className="text-2xl font-bold text-center">
+            Welcome, {user.displayName} 👋
           </h1>
           <p className="mt-2 text-center">
             {userRole === "admin" &&
@@ -89,7 +92,7 @@ const MainDashboard = () => {
               "Track your donations and support blood donation efforts."}
           </p>
         </div>
- 
+
         {userRole === "admin" && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -122,12 +125,8 @@ const MainDashboard = () => {
           </>
         )}
 
-       
-      
-
- 
         {userRole === "volunteer" && (
-         <>
+          <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white rounded-lg shadow p-6 flex items-center space-x-4">
                 <FaUsers className="text-blue-500 text-3xl" />
@@ -157,8 +156,8 @@ const MainDashboard = () => {
             <div className="text-center">This is for volunteer</div>
           </>
         )}
-        
-            {userRole === "donor" && (
+
+        {userRole === "donor" && (
           <>
             <div className="w-3/6 mx-auto  bg-white rounded-lg shadow p-6 flex items-center justify-center space-x-4">
               <FaMoneyBillWave className="text-green-500 text-3xl" />
@@ -167,10 +166,18 @@ const MainDashboard = () => {
                 <h2 className="text-xl font-bold">${stats.totalFunding}</h2>
               </div>
             </div>
- 
-            <div className="text-center">Hello world</div>
+
+            <DonationRequest />
+            {/* View All Requests Button */}
+            <div className="text-center mt-4">
+              <Link to={"my-request"}>
+                <button className="btn btn-outline btn-sm">
+                  View My All Requests
+                </button>
+              </Link>
+            </div>
           </>
-        )}  
+        )}
       </div>
     );
 };
