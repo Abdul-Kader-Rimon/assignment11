@@ -12,6 +12,7 @@ import MyRequest from "../pages/Dashboard/MyRequest/MyRequest";
 import Donate from "../pages/Donate/Donate";
 import PaymentSuccess from "../pages/PaymentSucces/PaymentSuccess";
 import SearchRequest from "../pages/SearchRequest/SearchRequest";
+import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
  
 
 
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "my-request",
         element: <MyRequest />,
+      },
+      {
+        path: "my-profile",
+        element: <ProfilePage />,
       },
     ],
   },

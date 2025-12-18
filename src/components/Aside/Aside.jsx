@@ -81,15 +81,15 @@ function Aside() {
         </Link>
 
         <Link
-          to="/dashboard/users"
+          to="/dashboard/my-profile"
           className={`${linkBase} ${
-            isActive("/dashboard/users")
+            isActive("/dashboard/my-profile")
               ? "bg-indigo-600 text-white shadow-lg"
               : "text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
         >
           <Users size={20} />
-          Users
+          Profile
         </Link>
 
         {/* <Link
