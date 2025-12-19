@@ -16,6 +16,7 @@ import ProfilePage from "../pages/Dashboard/Profile/ProfilePage";
 import ViewDetails from "../pages/Dashboard/ViewDetails/ViewDetails";
 import EditRequest from "../pages/Dashboard/EditRequest/EditRequest";
 import AllDonationRequest from "../pages/AllDonationRequest/AllDonationRequest";
+import AllRequestVolunteer from "../pages/AllDonationRequestVolunteer/AllRequestVolunteer";
  
 
 
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "all-request",
         element: <AllDonationRequest />,
+      },
+      {
+        path: "all-request-volunteer",
+        element: <AllRequestVolunteer />,
       },
       {
         path: "/dashboard/view-details/:id",

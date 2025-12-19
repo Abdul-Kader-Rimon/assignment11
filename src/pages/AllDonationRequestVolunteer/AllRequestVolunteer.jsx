@@ -1,67 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaTrash } from 'react-icons/fa';
- 
-const AllDonationRequest = () => {
-     
-       const axiosSecure = useAxiosSecure();
-       const [requests, setRequests] = useState([]);
-      const [loading, setLoading] = useState(true);
-    
-    const fetchRequests = () => {
-        setLoading(true);
 
-        axiosSecure.get("/admin/all-donation-requests")
+const AllRequestVolunteer = () => {
+    const axiosSecure = useAxiosSecure();
+    const [requests, setRequests] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+        const fetchRequests = () => {
+          setLoading(true);
+
+          axiosSecure.get("/admin/all-donation-requests")
             .then((res) => {
-            setRequests(res.data);
+              setRequests(res.data);
             })
             .catch((error) => {
-               console.log("Failed to fetch donation requests: ", error);  
+              console.log("Failed to fetch donation requests: ", error);
             })
             .finally(() => {
-                setLoading(false);
-            })
-    }
-
-    useEffect(() => {
-        fetchRequests()
-    }, [])
-    
-    const handleStatusChange = (id, status) => {
-        axiosSecure
-          .patch(`/donation-requests/status/${id}`, { status })
-          .then(() => {
-            setRequests((prev) =>
-              prev.map((req) =>
-                req._id === id ? { ...req, donation_status: status } : req
-              )
-            );
-          })
-          .catch((error) => {
-            console.log("Failed to update status:", error);
-          });
-    }
-
-       const handleDelete = (id) => {
-         if (!window.confirm("Are you sure you want to delete this request?"))
-           return;
-
-         axiosSecure
-           .delete(`/donation-requests/${id}`)
-           .then(() => {
-             setRequests((prev) => prev.filter((req) => req._id !== id));
-           })
-           .catch((err) => {
-             console.error("Failed to delete request: ", err);
-           });
+              setLoading(false);
+            });
     };
     
-
+        useEffect(() => {
+            fetchRequests()
+        }, [])
+    
+        const handleStatusChange = (id, status) => {
+          axiosSecure.patch(`/donation-requests/status/${id}`, { status })
+            .then(() => {
+              setRequests((prev) =>
+                prev.map((req) =>
+                  req._id === id ? { ...req, donation_status: status } : req
+                )
+              );
+            })
+            .catch((error) => {
+              console.log("Failed to update status:", error);
+            });
+        };
 
       if (loading) return <p className="text-center p-6">Loading donation requests...</p>;
-
-
-
 
     return (
       <div className="p-4 md:p-6">
@@ -113,7 +91,8 @@ const AllDonationRequest = () => {
                       {req.donation_status || "pending"}
                     </span>
                   </td>
-                  <td className="p-2 flex items-center my-5 flex-wrap gap-2">
+                  <td className="p-2 flex flex-wrap gap-2">
+                    {/* Only status update buttons for volunteers */}
                     <button
                       onClick={() => handleStatusChange(req._id, "inprogress")}
                       className="btn btn-xs btn-info"
@@ -125,12 +104,6 @@ const AllDonationRequest = () => {
                       className="btn btn-xs btn-error"
                     >
                       Cancel
-                    </button>
-                    <button
-                      onClick={() => handleDelete(req._id)}
-                      className="btn btn-xs btn-outline btn-error"
-                    >
-                      <FaTrash />
                     </button>
                   </td>
                 </tr>
@@ -147,6 +120,6 @@ const AllDonationRequest = () => {
         </div>
       </div>
     );
- };
- 
- export default AllDonationRequest;
+};
+
+export default AllRequestVolunteer;
