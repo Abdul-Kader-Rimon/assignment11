@@ -71,12 +71,9 @@ const MainDashboard = () => {
     return (
       <div className="p-6 space-y-6">
         <div className="bg-blue-500 text-white p-6 rounded-lg shadow-md w-4/6 mx-auto">
+ 
           <h1 className="text-2xl font-bold text-center">
-            {userRole === "admin" && " Welcome to Admin Dashboard"}
-            {userRole === "volunteer" && "Welcome Volunteer"}
-          </h1>
-          <h1 className="text-2xl font-bold text-center">
-            Welcome, {user.displayName} 👋
+            Welcome, {user.displayName}  
           </h1>
           <p className="mt-2 text-center">
             {userRole === "admin" &&
