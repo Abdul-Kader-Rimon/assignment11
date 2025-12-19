@@ -53,6 +53,19 @@ function Aside() {
             Add Request
           </Link>
         )}
+        {role == "Donor" && (
+          <Link
+            to="/dashboard/my-request"
+            className={`${linkBase} ${
+              isActive("/dashboard/my-request")
+                ? "bg-indigo-600 text-white shadow-lg"
+                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+            }`}
+          >
+            <BookOpen size={20} />
+            My Request
+          </Link>
+        )}
 
         {role == "admin" && (
           <Link
@@ -67,18 +80,19 @@ function Aside() {
             All Users
           </Link>
         )}
-
-        <Link
-          to="/dashboard/my-request"
-          className={`${linkBase} ${
-            isActive("/dashboard/my-request")
-              ? "bg-indigo-600 text-white shadow-lg"
-              : "text-slate-300 hover:bg-slate-800 hover:text-white"
-          }`}
-        >
-          <BookOpen size={20} />
-          My Request
-        </Link>
+        {role == "admin" && (
+          <Link
+            to="/dashboard/all-request"
+            className={`${linkBase} ${
+              isActive("/dashboard/my-request")
+                ? "bg-indigo-600 text-white shadow-lg"
+                : "text-slate-300 hover:bg-slate-800 hover:text-white"
+            }`}
+          >
+            <BookOpen size={20} />
+             ALL Request
+          </Link>
+        )}
 
         <Link
           to="/dashboard/my-profile"
