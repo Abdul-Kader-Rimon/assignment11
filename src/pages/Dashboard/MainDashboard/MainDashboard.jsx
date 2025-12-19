@@ -47,12 +47,7 @@ const MainDashboard = () => {
                      totalRequests = res.data.totalRequests;
                      totalFunding = res.data.totalFunding;
                 }
-
-
-                if (userRole === "donor") {
-                    const paymentsRes = await axiosSecure.get("/payments/total");
-                    totalFunding = paymentsRes.data.totalAmount;
-                }
+ 
 
                 setStats({ totalUsers, totalRequests, totalFunding });
             } catch (error) {
@@ -159,16 +154,10 @@ const MainDashboard = () => {
 
         {userRole === "donor" && (
           <>
-            <div className="w-3/6 mx-auto  bg-white rounded-lg shadow p-6 flex items-center justify-center space-x-4">
-              <FaMoneyBillWave className="text-green-500 text-3xl" />
-              <div>
-                <p className="text-gray-500">My Total Donation</p>
-                <h2 className="text-xl font-bold">${stats.totalFunding}</h2>
-              </div>
-            </div>
+           
 
             <DonationRequest />
-            {/* View All Requests Button */}
+           
             <div className="text-center mt-4">
               <Link to={"my-request"}>
                 <button className="btn btn-outline btn-sm">
