@@ -5,11 +5,14 @@ const AllRequestVolunteer = () => {
     const axiosSecure = useAxiosSecure();
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
+ 
+    const [filter , setFilter] = useState("")
 
         const fetchRequests = () => {
-          setLoading(true);
+            setLoading(true);
+              const url = filter ? `/admin/all-donation-requests?status=${filter}`: `/admin/all-donation-requests`;
 
-          axiosSecure.get("/admin/all-donation-requests")
+          axiosSecure.get(url)
             .then((res) => {
               setRequests(res.data);
             })
@@ -23,7 +26,7 @@ const AllRequestVolunteer = () => {
     
         useEffect(() => {
             fetchRequests()
-        }, [])
+        }, [filter])
     
         const handleStatusChange = (id, status) => {
           axiosSecure.patch(`/donation-requests/status/${id}`, { status })
@@ -46,6 +49,20 @@ const AllRequestVolunteer = () => {
         <h2 className="text-xl md:text-2xl font-bold mb-4">
           All Blood Donation Requests
         </h2>
+
+        <div className="mb-4">
+          <select
+            className="select select-bordered w-full max-w-xs"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="pending">Pending</option>
+            <option value="inprogress">In Progress</option>
+            <option value="done">Done</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
 
         <div className="overflow-x-auto">
           <table className="table-auto min-w-[700px] w-full border border-slate-200">
@@ -91,8 +108,8 @@ const AllRequestVolunteer = () => {
                       {req.donation_status || "pending"}
                     </span>
                   </td>
-                  <td className="p-2 flex flex-wrap gap-2">
-                    {/* Only status update buttons for volunteers */}
+                  <td className="p-2 my-5 flex flex-wrap gap-2">
+                   
                     <button
                       onClick={() => handleStatusChange(req._id, "inprogress")}
                       className="btn btn-xs btn-info"
