@@ -35,7 +35,7 @@ const AllPendingRequest = () => {
 
   return (
     <div className="w-11/12 mx-auto mt-8">
-      <h2 className="text-4xl font-bold text-center mb-6 py-4">
+      <h2 className= "text-2xl md:text-5xl font-bold text-center text-primary mb-6 py-4">
         Pending Blood Donation Requests
       </h2>
 

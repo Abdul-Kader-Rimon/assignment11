@@ -38,7 +38,7 @@ const Donate = () => {
     return (
       <div>
         <h2 className="text-2xl mt-20 md:text-5xl font-bold text-center text-primary mb-3">
-          🩸 Support Blood Donation Program
+         Support Blood Donation Program
         </h2>
 
         <p className="text-center mt-10 text-gray-600 mb-6 max-w-xl mx-auto">

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import useAxios from '../../../Hooks/useAxios';
+import { MdOutlineContentPasteSearch } from 'react-icons/md';
 
 const SearchRequest = () => {
        const [upazilas, setUpazilas] = useState([]);
@@ -50,9 +51,13 @@ const SearchRequest = () => {
     
     return (
       <div>
+        <h2 className="text-2xl my-5 md:text-5xl font-bold text-center text-primary mb-3">
+          Search Blood Donation Requests
+        </h2>
+
         <form
           onSubmit={handleSearch}
-          className="fieldset flex justify-center items-center gap-4 mt-5 "
+          className="fieldset    flex flex-col md:flex-row justify-center items-center gap-4 mt-5 "
         >
           <select name="bloodGroup" className="select rounded-full">
             <option disabled selected value="">
@@ -97,10 +102,11 @@ const SearchRequest = () => {
               </option>
             ))}
           </select>
-          <button className="btn rounded-full">Search</button>
+          <button className="btn rounded-full">
+            <MdOutlineContentPasteSearch size={20} /> Search
+          </button>
         </form>
 
-        {/* donor search data  */}
         <div className="w-10/12 mx-auto">
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loading && (
@@ -122,7 +128,8 @@ const SearchRequest = () => {
                   className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-500 p-6 flex flex-col gap-3 card-animate"
                 >
                   <h3 className="font-bold text-xl text-blue-600">
-                    <span className='text-black'> Recipient Name :</span>  {donor.recipient_name || donor.recipient_name}
+                    <span className="text-black"> Recipient Name :</span>{" "}
+                    {donor.recipient_name || donor.recipient_name}
                   </h3>
 
                   <p className="text-gray-700">
