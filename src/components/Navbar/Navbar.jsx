@@ -1,9 +1,20 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const Navbar = () => {
-    const {user , signOutUser} = useContext(AuthContext)
+  const { user, signOutUser } = useContext(AuthContext)
+  
+  const navigate = useNavigate();
+
+  const handleDonateClick = () => {
+     if (!user) {
+       navigate("/login");
+     } else {
+       navigate("/donate");
+     }
+  }
+  
     return (
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
@@ -30,14 +41,14 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>All Request</a>
+                <Link to={"/all-pending-request"}>All Request</Link>
               </li>
 
               <li>
                 <Link to={"/search"}>Search</Link>
               </li>
               <li>
-                <Link to={"/donate"}>Donate</Link>
+                <button onClick={handleDonateClick}>Donate</button>
               </li>
             </ul>
           </div>
@@ -46,14 +57,14 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>All Request</a>
+              <Link to={"/all-pending-request"}>All Request</Link>
             </li>
 
             <li>
               <Link to={"/search"}>Search</Link>
             </li>
             <li>
-              <Link to={"/donate"}>Donate</Link>
+              <button onClick={handleDonateClick}>Donate</button>
             </li>
           </ul>
         </div>

@@ -17,6 +17,7 @@ import ViewDetails from "../pages/Dashboard/ViewDetails/ViewDetails";
 import EditRequest from "../pages/Dashboard/EditRequest/EditRequest";
 import AllDonationRequest from "../pages/AllDonationRequest/AllDonationRequest";
 import AllRequestVolunteer from "../pages/AllDonationRequestVolunteer/AllRequestVolunteer";
+import AllPendingRequest from "../pages/AllPendingRequest/AllPendingRequest";
  
 
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchRequest />,
+      },
+      {
+        path: "/all-pending-request",
+        element: <AllPendingRequest/>,
       },
     ],
   },
