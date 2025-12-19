@@ -122,7 +122,7 @@ const SearchRequest = () => {
                   className="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-500 p-6 flex flex-col gap-3 card-animate"
                 >
                   <h3 className="font-bold text-xl text-blue-600">
-                    {donor.name || donor.requester_name}
+                    <span className='text-black'> Recipient Name :</span>  {donor.recipient_name || donor.recipient_name}
                   </h3>
 
                   <p className="text-gray-700">
