@@ -5,11 +5,13 @@ import { AuthContext } from "../../Context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import toast from "react-hot-toast";
+import { IoIosHome } from "react-icons/io";
  
 
 function Aside() {
   const location = useLocation();
   const { role } = useContext(AuthContext);
+   
 
   const handleLogout = () => {
     signOut(auth)
@@ -29,12 +31,10 @@ function Aside() {
 
   return (
     <aside className="min-h-screen w-64 bg-slate-900 text-slate-100 flex flex-col shadow-xl">
-    
-      <div className="px-6 py-5 text-xl font-bold tracking-wide border-b border-slate-700">
-        Admin Panel
+      <div className="px-6 py-5 text-2xl md:text-4xl font-bold tracking-wide border-b border-slate-700">
+        BloodCare
       </div>
 
-       
       <nav className="flex-1 px-4 py-6 space-y-2">
         <Link
           to="/dashboard"
@@ -115,7 +115,6 @@ function Aside() {
             ALL Request
           </Link>
         )}
-        
 
         <Link
           to="/dashboard/my-profile"
@@ -128,12 +127,16 @@ function Aside() {
           <Users size={20} />
           Profile
         </Link>
-
-      
       </nav>
 
-     
-      <div className="px-4 py-4 border-t border-slate-700">
+      <div className="px-4 py-4 border-t border-slate-700 space-y-2">
+        <Link
+          to={"/"}
+          className="flex w-full items-center gap-3 px-4 py-2 rounded-xl text-slate-300 hover:bg-red-600 hover:text-white transition"
+        >
+          <IoIosHome />
+          Home
+        </Link>
         <button
           onClick={handleLogout}
           className="flex w-full items-center gap-3 px-4 py-2 rounded-xl text-slate-300 hover:bg-red-600 hover:text-white transition"
