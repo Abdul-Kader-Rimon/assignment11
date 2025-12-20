@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
+import toast from "react-hot-toast";
  
 
 function Aside() {
@@ -12,6 +13,13 @@ function Aside() {
 
   const handleLogout = () => {
     signOut(auth)
+      .then(() => {
+        toast.success("Logout successful");
+         
+      })
+      .catch(() => {
+        toast.error("Logout failed!");
+      });
   }
 
   const linkBase =
@@ -21,7 +29,7 @@ function Aside() {
 
   return (
     <aside className="min-h-screen w-64 bg-slate-900 text-slate-100 flex flex-col shadow-xl">
-       
+    
       <div className="px-6 py-5 text-xl font-bold tracking-wide border-b border-slate-700">
         Admin Panel
       </div>

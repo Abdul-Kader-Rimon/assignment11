@@ -72,9 +72,8 @@ const MainDashboard = () => {
     return (
       <div className="p-6 space-y-6">
         <div className="bg-blue-500 text-white p-6 rounded-lg shadow-md w-4/6 mx-auto">
- 
           <h1 className="text-2xl font-bold text-center">
-            Welcome, {user.displayName}  
+            Welcome, {user.displayName}
           </h1>
           <p className="mt-2 text-center">
             {userRole === "admin" &&
@@ -114,7 +113,7 @@ const MainDashboard = () => {
               </div>
             </div>
 
-            <div className="text-center">This is for admin</div>
+             
           </>
         )}
 
@@ -146,19 +145,17 @@ const MainDashboard = () => {
               </div>
             </div>
 
-            <div className="text-center">This is for volunteer</div>
+             
           </>
         )}
 
         {userRole === "donor" && (
           <>
-           
-
             <DonationRequest />
-           
+
             <div className="text-center mt-4">
               <Link to={"my-request"}>
-                <button className="btn btn-outline btn-sm">
+                <button className="btn bg-[#422ad5] text-white rounded-lg">
                   View My All Requests
                 </button>
               </Link>

@@ -1,6 +1,7 @@
  import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
  
 const EditRequest = () => {
      
@@ -55,28 +56,32 @@ const EditRequest = () => {
     const handleSave = () => {
         for (let key in request) {
             if (!request[key]) {
-                alert(`Please fill in ${key.replace("_", " ")}`);
+                toast.error(`Please fill in ${key.replace("_", " ")}`);
                 return;
             }
         }
 
         setUpdating(true);
 
-        axiosSecure.patch(`/donation-requests/${id}`, request)
-            .then((res) => {
-                console.log("Update response:", res.data);
-                alert("Request updated successfully!");
-                navigate('/dashboard')
-            
-            })
-            .finally(() => setUpdating(false))
+        axiosSecure
+          .patch(`/donation-requests/${id}`, request)
+          .then((res) => {
+            console.log("Update response:", res.data);
+            toast.success("Request updated successfully!");
+            navigate("/dashboard");
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Failed to update request");
+          })
+          .finally(() => setUpdating(false));
     };
     
       if (loading) return <p className="text-center p-6">Loading...</p>;
 
     return (
-      <div className="max-w-xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow space-y-6">
-        <h2 className="text-2xl font-bold text-center">
+      <div className="max-w-xl mx-auto mt-10 p-4 sm:p-6 bg-white rounded-lg shadow space-y-6">
+        <h2 className="text-2xl md:text-4xl font-bold text-[#422ad5]  text-center">
           Edit Your Donation Request
         </h2>
 
@@ -104,12 +109,10 @@ const EditRequest = () => {
           ))}
 
           <button
-             onClick={handleSave}
-             disabled={updating}
+            onClick={handleSave}
+            disabled={updating}
             className={`w-full px-4 py-2 text-white rounded ${
-              updating
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-500 hover:bg-green-600 transition"
+              updating ? "bg-gray-400 cursor-not-allowed" : " bg-[#422ad5] "
             }`}
           >
             {updating ? "Updating..." : "Update Request"}

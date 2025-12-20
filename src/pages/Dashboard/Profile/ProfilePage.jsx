@@ -5,6 +5,7 @@ import axios from 'axios';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdSaveAs } from 'react-icons/md';
 import Loader from '../../../components/Loader/Loader';
+import toast from 'react-hot-toast';
 
 const ProfilePage = () => {
     const axiosSecure = useAxiosSecure();
@@ -82,11 +83,11 @@ const ProfilePage = () => {
             .then(() => {
                 setProfile((prev) => ({ ...prev, ...formData }));
 
-                alert("Profile Updateed SuccessFully");
+                 toast.success("Profile Updateed SuccessFully");
 
                 setEditMode(false)
             }).catch((error) => {
-                alert("Failed to update profile!", error);
+                toast.error("Failed to update profile!", error);
             })
     };
 
@@ -94,6 +95,7 @@ const ProfilePage = () => {
 
     return (
       <div>
+        <h2 className="text-[#422ad5] text-2xl md:text-4xl font-bold text-center mt-10">Update Your Profile</h2>
         <div className="p-6 max-w-2xl mx-auto space-y-6">
           <form className="bg-white shadow rounded-lg p-6 space-y-4">
             <div className="flex items-center justify-center space-x-4">
@@ -169,13 +171,11 @@ const ProfilePage = () => {
               </select>
             </div>
 
- 
-
             <div>
               <label className="block text-gray-500">Blood Group</label>
               <select
                 name="bloodGroup"
-                value={profile.bloodGroup}  
+                value={profile.bloodGroup}
                 onChange={handleChange}
                 disabled={!editMode}
                 className={`w-full border px-3 py-2 rounded ${

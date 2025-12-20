@@ -6,6 +6,7 @@ import { CiLogout } from 'react-icons/ci';
 import { MdDashboard } from 'react-icons/md';
 import { IoLogIn } from 'react-icons/io5';
 import { FaRegIdBadge, FaRegUserCircle } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 
 const Navbar = () => {
@@ -19,6 +20,16 @@ const Navbar = () => {
      } else {
        navigate("/donate");
      }
+  }
+  const handleLogout = () => {
+    signOutUser()
+      .then(() => {
+        toast.success("Logout successful");
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("Logout failed!");
+      });
   }
   
     return (
@@ -180,7 +191,7 @@ const Navbar = () => {
                 <li>
                   <button
                     className="flex items-center gap-1 text-lg font-bold"
-                    onClick={signOutUser}
+                    onClick={handleLogout}
                   >
                     <CiLogout color="#422ad5" size={20} strokeWidth={2.5} />
                     Logout

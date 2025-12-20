@@ -60,8 +60,8 @@ const MyRequest = () => {
     };
   
   return (
-    <div className="mt-6 bg-white rounded-lg shadow p-4 md:p-6">
-      <h2 className="text-xl font-bold mb-4 text-center">
+    <div className="mt-6 bg-white rounded-lg shadow p-4 md:p-6 ">
+      <h2 className="text-xl text-[#422ad5] md:text-3xl  font-bold mb-4 text-center">
         My Donation Requests
       </h2>
 
@@ -135,13 +135,13 @@ const MyRequest = () => {
                     to={`/dashboard/edit-request/${req._id}`}
                     className="btn btn-xs btn-warning flex items-center gap-1"
                   >
-                    <MdEditCalendar size={16} />  
+                    <MdEditCalendar size={16} />
                   </Link>
                   <button
                     onClick={() => handleDelete(req._id)}
                     className="btn btn-xs btn-danger flex items-center gap-1"
                   >
-                    <MdDelete size={16} />  
+                    <MdDelete size={16} />
                   </button>
                   <Link
                     to={`/dashboard/view-details/${req._id}`}
@@ -156,7 +156,6 @@ const MyRequest = () => {
         </table>
       </div>
 
-    
       <div className="flex justify-center items-center mt-4 gap-2 flex-wrap">
         <button
           onClick={handlePrev}

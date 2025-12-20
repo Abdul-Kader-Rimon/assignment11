@@ -54,7 +54,7 @@ const DonationRequest = () => {
 
     return (
       <div className="mt-6 bg-white rounded-lg shadow p-4 md:p-6">
-        <h2 className="text-xl text-center font-bold mb-4">
+        <h2 className="text-xl md:text-3xl text-[#422ad5] text-center font-bold mb-4">
           Recent Donation Requests
         </h2>
 

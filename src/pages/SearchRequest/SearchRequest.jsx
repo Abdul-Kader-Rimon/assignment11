@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import useAxios from '../../../Hooks/useAxios';
 import { MdOutlineContentPasteSearch } from 'react-icons/md';
+import Loader from '../../components/Loader/Loader';
 
 const SearchRequest = () => {
        const [upazilas, setUpazilas] = useState([]);

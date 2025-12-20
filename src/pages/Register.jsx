@@ -17,6 +17,8 @@ import axios from "axios";
    const [districts, setDistricts] = useState([]);
    const [district, setDistrict] = useState('');
 
+   
+
    useEffect(() => {
      axios.get('/upazila.json')
        .then(res => {
@@ -30,7 +32,7 @@ import axios from "axios";
 
  
 
-  //  const navigate = useNavigate();
+   const navigate = useNavigate();
 
  
 
@@ -95,10 +97,10 @@ import axios from "axios";
            .catch(error => {
            console.log(error)
          })
-        //  navigate("/");
+         navigate("/");
        })
        .catch((error) => {
-         // console.log(error);
+          
          toast.error(error.message, { id: "create-user" });
        });
      }
@@ -112,7 +114,7 @@ import axios from "axios";
    return (
      <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl mt-12">
        <div className="card-body">
-         <h1 className="text-3xl font-bold text-center">Register</h1>
+         <h1 className="text-3xl md:text-5xl text-[#422ad5] font-bold text-center">Register</h1>
          <form onSubmit={handleRegister}>
            <fieldset className="fieldset">
              <label className="label">Name</label>
@@ -139,11 +141,7 @@ import axios from "axios";
                placeholder="Photo URL"
              />
              <label className="label">Blood Group</label>
-             <select
-               name="blood"
-               
-               className="select rounded-full"
-             >
+             <select name="blood" className="select rounded-full">
                <option disabled selected value="">
                  Select Blood Group
                </option>
@@ -205,22 +203,15 @@ import axios from "axios";
                </span>
              </div>
 
-             <button className="btn button  text-black  mt-4 rounded-full ">
+             <button className="btn  bg-[#422ad5] text-white  mt-4 rounded-full ">
                Register
              </button>
            </fieldset>
          </form>
 
-         {/* <button
-           onClick={handleGoogleSignIn}
-           className="btn button bg-white rounded-full text-black border-[#e5e5e5]"
-         >
-           <FaGoogle />
-           Login with Google
-         </button> */}
          <p className="text-center">
            Already have an account? Please{" "}
-           <Link className="text-blue-500 hover:text-blue-800" to="/auth/login">
+           <Link to={"/login"} className="text-blue-500 hover:text-blue-800">
              Login
            </Link>{" "}
          </p>
