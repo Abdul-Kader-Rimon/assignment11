@@ -16,7 +16,7 @@ const Navbar = () => {
   }
   
     return (
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar  mb-5 border-b-1 border-[#422ad5] ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,7 +55,12 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <Link
+            to={"/"}
+            className="btn btn-ghost text-2xl font-bold text-[#422ad5]"
+          >
+            BloodCare
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
