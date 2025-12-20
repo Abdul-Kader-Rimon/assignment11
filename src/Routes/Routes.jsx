@@ -18,6 +18,7 @@ import EditRequest from "../pages/Dashboard/EditRequest/EditRequest";
 import AllDonationRequest from "../pages/AllDonationRequest/AllDonationRequest";
 import AllRequestVolunteer from "../pages/AllDonationRequestVolunteer/AllRequestVolunteer";
 import AllPendingRequest from "../pages/AllPendingRequest/AllPendingRequest";
+import ErrorPage from "../components/Errorpage/Errorpage";
  
 
 
@@ -56,7 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-pending-request",
-        element: <AllPendingRequest/>,
+        element: <AllPendingRequest />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },
