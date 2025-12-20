@@ -46,7 +46,7 @@ const BannerSlider = () => {
             Join our community of blood donors and help people in need.
           </p>
 
-          <div className="flex justify-center gap-6 mt-6">
+          <div className="flex flex-col md:flex-row justify-center gap-6 mt-6">
             <Link
               to="/register"
               className="fancy-btn fancy-red px-10 py-3 bg-red-600 text-white font-semibold text-lg  hover:bg-red-700"

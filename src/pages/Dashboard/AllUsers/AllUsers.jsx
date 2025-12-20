@@ -89,7 +89,8 @@ const AllUsers = () => {
                     {user?.status}
                   </span>
                 </td>
-                <th>
+                <th className='flex
+                   flex-col md:flex-row gap-1  mt-6  md:mt-5 md:pb-2'>
                   {user?.status == "active" ? (
                     <button
                       onClick={() => handleStatusChange(user?.email, "blocked")}
