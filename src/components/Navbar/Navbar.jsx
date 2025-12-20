@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { Link, useNavigate } from 'react-router';
+import { CiLogout } from 'react-icons/ci';
+import { Bold } from 'lucide-react';
+import { MdDashboard } from 'react-icons/md';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext)
@@ -79,18 +82,59 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+ 
+
         <div className="navbar-end">
-          <Link to={"dashboard"} className="btn mr-2">
-            Deshboard
-          </Link>
-          {user ? (
-            <button onClick={signOutUser} className="btn">
-              LogOut
-            </button>
-          ) : (
-            <Link to={"/login"} className="btn">
-              LogIn
+          {!user ? (
+            <Link to="/login" className="btn">
+              Login
             </Link>
+          ) : (
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/Zm8XKxv/user.png"}
+                    alt="user"
+                  />
+                </div>
+              </div>
+
+              <ul className="menu dropdown-content mt-3 p-4 shadow bg-base-100 rounded-box w-64">
+                <div className="flex items-center gap-3 border-b border-[#422ad5] pb-3">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/Zm8XKxv/user.png"}
+                    className="w-12 h-12 rounded-full"
+                    alt=""
+                  />
+                  <div>
+                    <p className="font-bold text-lg text-[#422ad5]">
+                      {user.displayName}
+                    </p>
+                    <p className="text-sm">{user.email}</p>
+                  </div>
+                </div>
+
+                <li className="mt-2">
+                  <Link
+                    to="/dashboard"
+                    className="flex items-center gap-1 text-lg font-bold"
+                  >
+                    <MdDashboard color="#422ad5" size={20} />
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    className="flex items-center gap-1 text-lg font-bold"
+                    onClick={signOutUser}
+                  >
+                    <CiLogout color="#422ad5" size={20} strokeWidth={2.5} />
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
           )}
         </div>
       </div>
