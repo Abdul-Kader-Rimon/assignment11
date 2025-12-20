@@ -12,16 +12,15 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import axios from "axios";
- 
 
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState('');
-  const [roleLoading , setRoleLoading] = useState(true)
+  const [role, setRole] = useState("");
+  const [roleLoading, setRoleLoading] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [userStatus , setUserStatus]= useState('')
+  const [userStatus, setUserStatus] = useState("");
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -51,16 +50,11 @@ const AuthProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email).finally(() => setLoading(false));
   };
 
-
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       // console.log(currentUser)
       setLoading(false);
-
-    
-
     });
 
     return () => {
@@ -68,18 +62,18 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-    useEffect(() => {
-      if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-      axios
-        .get(`http://localhost:5000/users/role/${user.email}`)
-        .then((res) => {
-          setRole(res.data.role);
-          setUserStatus(res.data.status)
-          setRoleLoading(false)
-        });
-    }, [user]);
-  
+    axios
+      .get(`https://assignment11-beta.vercel.app/users/role/${user.email}`)
+      .then((res) => {
+        setRole(res.data.role);
+        setUserStatus(res.data.status);
+        setRoleLoading(false);
+      });
+  }, [user]);
+
   // console.log(role)
 
   const authInfo = {

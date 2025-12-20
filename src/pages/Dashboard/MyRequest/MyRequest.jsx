@@ -3,6 +3,7 @@ import { AuthContext } from '../../../Context/AuthContext';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { MdDelete, MdEditCalendar } from 'react-icons/md';
+import Swal from 'sweetalert2';
  
  
  
@@ -49,15 +50,31 @@ const MyRequest = () => {
       )
   }
 
-    const handleDelete = (id) => {
-      if (!window.confirm("Are you sure you want to delete?")) return;
-
-      axiosSecure.delete(`/donation-requests/${id}`)
-        .then(() => {
-          setMyRequests((prev) => prev.filter((r) => r._id !== id));
-        })
-        .catch((err) => console.log("Error deleting request:", err));
-    };
+ 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/donation-requests/${id}`)
+          .then(() => {
+            setMyRequests((prev) => prev.filter((r) => r._id !== id));
+            Swal.fire("Deleted!", "Your request has been deleted.", "success");
+          })
+          .catch((err) => {
+            console.log("Error deleting request:", err);
+            Swal.fire("Error!", "Failed to delete the request.", "error");
+          });
+      }
+    });
+  };
   
   return (
     <div className="mt-6 bg-white rounded-lg shadow p-4 md:p-6 ">
