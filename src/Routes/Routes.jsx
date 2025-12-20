@@ -19,6 +19,7 @@ import AllDonationRequest from "../pages/AllDonationRequest/AllDonationRequest";
 import AllRequestVolunteer from "../pages/AllDonationRequestVolunteer/AllRequestVolunteer";
 import AllPendingRequest from "../pages/AllPendingRequest/AllPendingRequest";
 import ErrorPage from "../components/Errorpage/Errorpage";
+import PublicRoute from "./PublicRoute";
  
 
 
@@ -33,11 +34,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element:<PublicRoute>
+          <Login />
+        </PublicRoute>
+          ,
       },
       {
         path: "/register",
-        element: <Register />,
+        element:<PublicRoute>
+          <Register />
+        </PublicRoute> ,
       },
       {
         path: "/donate",
