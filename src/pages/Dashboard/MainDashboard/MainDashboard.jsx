@@ -4,6 +4,7 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { FaMoneyBillWave, FaTint, FaUsers } from 'react-icons/fa';
 import DonationRequest from '../../Donor/DonationRequest';
 import { Link } from 'react-router';
+import Loader from '../../../components/Loader/Loader';
 
 const MainDashboard = () => {
     const axiosSecure = useAxiosSecure();
@@ -63,7 +64,7 @@ const MainDashboard = () => {
         return <p className='text-center p-6'>Loading  user info....</p>
     }
     if (loading) {
-        return <p className='text-center p-6'>Loading desboard stats....</p>
+        return  <Loader/>
     }
 
     const userRole = role.toLowerCase();

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loader from '../../components/Loader/Loader';
 
 const AllRequestVolunteer = () => {
     const axiosSecure = useAxiosSecure();
@@ -42,7 +43,7 @@ const AllRequestVolunteer = () => {
             });
         };
 
-      if (loading) return <p className="text-center p-6">Loading donation requests...</p>;
+      if (loading) return  <Loader/>;
 
     return (
       <div className="p-4 md:p-6">

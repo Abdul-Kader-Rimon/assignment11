@@ -4,6 +4,7 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import axios from 'axios';
 import { FaUserEdit } from 'react-icons/fa';
 import { MdSaveAs } from 'react-icons/md';
+import Loader from '../../../components/Loader/Loader';
 
 const ProfilePage = () => {
     const axiosSecure = useAxiosSecure();
@@ -89,7 +90,7 @@ const ProfilePage = () => {
             })
     };
 
-     if (loading) return <p className="text-center p-6">Loading profile...</p>;
+     if (loading) return  <Loader/>;
 
     return (
       <div>

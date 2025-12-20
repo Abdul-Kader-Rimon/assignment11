@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthContext';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import Loader from '../../../components/Loader/Loader';
  
  
 
@@ -47,7 +48,7 @@ const AddRequest = () => {
   }, [user, axiosSecure])
   
   if (loading) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return  <Loader/>;
   }
 
 
@@ -115,6 +116,7 @@ const AddRequest = () => {
           .catch((error) => {
               toast.error("Failed to create request");
             })
+            
     }
 
     return (

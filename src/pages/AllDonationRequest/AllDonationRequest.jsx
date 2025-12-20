@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaTrash } from 'react-icons/fa';
+import Loader from '../../components/Loader/Loader';
  
 const AllDonationRequest = () => {
      
@@ -62,7 +63,7 @@ const AllDonationRequest = () => {
     
 
 
-      if (loading) return <p className="text-center p-6">Loading donation requests...</p>;
+      if (loading) return  <Loader/>;
 
 
 

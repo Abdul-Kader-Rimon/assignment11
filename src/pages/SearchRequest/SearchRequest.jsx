@@ -49,8 +49,9 @@ const SearchRequest = () => {
     }
     
     
-    return (
-      <div>
+  return (
+    <div>
+        {loading && <Loader />}
         <h2 className="text-2xl my-5 md:text-5xl font-bold text-center text-primary mb-3">
           Search Blood Donation Requests
         </h2>

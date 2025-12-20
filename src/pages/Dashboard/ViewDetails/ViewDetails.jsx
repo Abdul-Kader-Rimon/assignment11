@@ -1,6 +1,7 @@
  import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import Loader from '../../../components/Loader/Loader';
  
 const ViewDetails = () => {
       const { id } = useParams();
@@ -25,7 +26,7 @@ const ViewDetails = () => {
         
     }, [id, axiosSecure])
     
-      if (loading) return <p className="text-center p-6 text-gray-500">Loading...</p>;
+      if (loading) return  <Loader/>;
     if (!request) return (
           <p className="text-center p-6 text-gray-500">No request found.</p>
         );

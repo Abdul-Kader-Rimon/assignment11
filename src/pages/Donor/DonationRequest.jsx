@@ -3,6 +3,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { MdDelete, MdEditCalendar } from 'react-icons/md';
+import Loader from '../../components/Loader/Loader';
 
 const DonationRequest = () => {
 
@@ -48,7 +49,7 @@ const DonationRequest = () => {
             );
     }
 
-     if (loading) return <p className="text-center p-4">Loading...</p>;
+     if (loading) return  <Loader/>;
      if (requests.length === 0) return null;
 
     return (

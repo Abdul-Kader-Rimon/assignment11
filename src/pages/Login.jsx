@@ -10,7 +10,10 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const { signInUser  } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
+  
+ 
+
   useEffect(() => {
     document.title = "Login";
   }, []);

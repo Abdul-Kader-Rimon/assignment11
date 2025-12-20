@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import useAxios from '../../../Hooks/useAxios';
 import { AuthContext } from '../../Context/AuthContext';
+import Loader from '../../components/Loader/Loader';
 
 const AllPendingRequest = () => {
   const { user } =  useContext(AuthContext)
@@ -40,7 +41,7 @@ const AllPendingRequest = () => {
       </h2>
 
       {loading && (
-        <p className="text-center text-gray-500">Loading requests...</p>
+         <Loader/>
       )}
 
       {!loading && requests.length === 0 && (
