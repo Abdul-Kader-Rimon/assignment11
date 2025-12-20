@@ -21,12 +21,12 @@ function Aside() {
 
   return (
     <aside className="min-h-screen w-64 bg-slate-900 text-slate-100 flex flex-col shadow-xl">
-      {/* Logo */}
+       
       <div className="px-6 py-5 text-xl font-bold tracking-wide border-b border-slate-700">
         Admin Panel
       </div>
 
-      {/* Navigation */}
+       
       <nav className="flex-1 px-4 py-6 space-y-2">
         <Link
           to="/dashboard"
@@ -107,6 +107,7 @@ function Aside() {
             ALL Request
           </Link>
         )}
+        
 
         <Link
           to="/dashboard/my-profile"
@@ -120,20 +121,10 @@ function Aside() {
           Profile
         </Link>
 
-        {/* <Link
-          to="/dashboard/settings"
-          className={`${linkBase} ${
-            isActive("/dashboard/settings")
-              ? "bg-indigo-600 text-white shadow-lg"
-              : "text-slate-300 hover:bg-slate-800 hover:text-white"
-          }`}
-        >
-          <Settings size={20} />
-          Settings
-        </Link> */}
+      
       </nav>
 
-      {/* Footer */}
+     
       <div className="px-4 py-4 border-t border-slate-700">
         <button
           onClick={handleLogout}

@@ -2,20 +2,25 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthContext';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
  
  
 
 const AddRequest = () => {
 
-    const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+   const axiosSecure = useAxiosSecure()
 
     const [upazilas, setUpazilas] = useState([]);
     const [upazila, setUpazila] = useState("");
     const [districts, setDistricts] = useState([]);
     const [district, setDistrict] = useState("");
+    
 
+  const [dbUser, setDbUser] = useState(null);
+  const [loading, setLoading] = useState(true);
  
-  const axiosSecure = useAxiosSecure()
+
 
     useEffect(() => {
       axios.get("/upazila.json").then((res) => {
@@ -24,10 +29,54 @@ const AddRequest = () => {
       axios.get("/district.json").then((res) => {
         setDistricts(res.data.districts);
       });
-    });
+    }, []);
+  
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure
+        .get(`/user?email=${user.email}`)
+        .then((res) => {
+          setDbUser(res.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+  }, [user, axiosSecure])
+  
+  if (loading) {
+    return <p className="text-center mt-10">Loading...</p>;
+  }
+
+
+  if (dbUser?.status === "blocked") {
+    return (
+      <div className="max-w-xl mx-auto mt-20 bg-red-50 border border-red-300 p-6 rounded-xl text-center">
+        <h2 className="text-2xl font-bold text-red-600 mb-2">
+          Account Blocked
+        </h2>
+        <p className="text-gray-700">
+          Your account has been blocked. You are not allowed to create donation
+          requests at this moment.
+        </p>
+        <p className="text-sm mt-2 text-gray-500">
+          Please contact support for more information.
+        </p>
+      </div>
+    );
+  }
+  
+    
 
     const handleRequest = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      
+      if (dbUser?.status === "blocked") {
+        toast.error("You are blocked. Cannot create request!");
+        return;
+      }
 
         const form = e.target
 
@@ -61,24 +110,25 @@ const AddRequest = () => {
 
         axiosSecure.post('/requests', formData)
             .then(res => {
-            alert(res.data.insertedId)
+             toast.success("Donation request created successfully!");
             })
-            .catch(error=> console.log(error))
+          .catch((error) => {
+              toast.error("Failed to create request");
+            })
     }
 
     return (
       <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-2xl p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">
+        <h2 className="text-2xl md:text-4xl text-[#422ad5] font-bold text-center mb-6">
           Create Donation Request
         </h2>
 
         <form onSubmit={handleRequest} className="space-y-4">
- 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="label">Requester Name</label>
               <input
-               name="requester_name"
+                name="requester_name"
                 type="text"
                 value={user?.displayName}
                 readOnly
@@ -89,7 +139,7 @@ const AddRequest = () => {
             <div>
               <label className="label">Requester Email</label>
               <input
-               name="requester_email"
+                name="requester_email"
                 type="email"
                 value={user?.email}
                 readOnly
@@ -98,7 +148,6 @@ const AddRequest = () => {
             </div>
           </div>
 
- 
           <div>
             <label className="label">Recipient Name</label>
             <input
@@ -152,7 +201,6 @@ const AddRequest = () => {
             </div>
           </div>
 
- 
           <div>
             <label className="label">Hospital Name</label>
             <input
@@ -164,7 +212,6 @@ const AddRequest = () => {
             />
           </div>
 
- 
           <div>
             <label className="label">Full Address</label>
             <input
@@ -176,7 +223,6 @@ const AddRequest = () => {
             />
           </div>
 
- 
           <div className="grid grid-cols-1  md:grid-cols-3  gap-4">
             <div>
               <label className="label">Blood Group</label>
@@ -186,17 +232,17 @@ const AddRequest = () => {
                 defaultValue=""
                 className="select select-bordered w-full"
               >
-                  <option disabled selected value="">
-                 Select Blood Group
-               </option>
-               <option value="A+">A+</option>
-               <option value="A-">A-</option>
-               <option value="B+">B+</option>
-               <option value="B-">B-</option>
-               <option value="AB+">AB+</option>
-               <option value="AB-">AB-</option>
-               <option value="O+">O+</option>
-               <option value="O-">O-</option>
+                <option disabled selected value="">
+                  Select Blood Group
+                </option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
               </select>
             </div>
 
@@ -220,7 +266,7 @@ const AddRequest = () => {
               />
             </div>
           </div>
- 
+
           <div>
             <label className="label">Request Message</label>
             <textarea
@@ -232,10 +278,9 @@ const AddRequest = () => {
             ></textarea>
           </div>
 
-       
           <button
             type="submit"
-            className="btn btn-error w-full text-white rounded-full mt-4"
+            className="btn  bg-[#422ad5] w-full text-white rounded-full mt-4"
           >
             Request Donation
           </button>
