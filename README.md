@@ -1,5 +1,7 @@
  # BloodCare 🩸
 
+ ![Homepage Screenshot](./src/assets/bloodcare-homepage.png)
+
  ## Front-end Live Site Link: https://bloodcare-akr.netlify.app/
 ## Server Side GitHub Repository Link:https://github.com/Abdul-Kader-Rimon/assignment11-backend
 
