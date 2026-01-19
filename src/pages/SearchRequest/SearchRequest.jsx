@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useAxios from '../../../Hooks/useAxios';
 import { MdOutlineContentPasteSearch } from 'react-icons/md';
 import Loader from '../../components/Loader/Loader';
+import { motion } from "framer-motion";
 
 const SearchRequest = () => {
        const [upazilas, setUpazilas] = useState([]);
@@ -53,9 +54,22 @@ const SearchRequest = () => {
   return (
     <div>
         {loading && <Loader />}
-        <h2 className="text-2xl my-5 md:text-5xl font-bold text-center text-primary mb-3">
+        {/* <h2 className="text-2xl my-5 md:text-5xl font-bold text-center text-primary mb-3">
           Search Blood Donation Requests
-        </h2>
+        </h2> */}
+
+         <motion.h2
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+      }}
+      className="text-2xl md:text-3xl font-bold text-center text-primary mb-6 py-4 tracking-tight"
+    >
+      Search Blood Donation Requests
+    </motion.h2>
+         
 
         <form
           onSubmit={handleSearch}

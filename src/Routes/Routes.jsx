@@ -20,6 +20,14 @@ import AllRequestVolunteer from "../pages/AllDonationRequestVolunteer/AllRequest
 import AllPendingRequest from "../pages/AllPendingRequest/AllPendingRequest";
 import ErrorPage from "../components/Errorpage/Errorpage";
 import PublicRoute from "./PublicRoute";
+import About from "../components/AdditionalPages/About";
+import Contact from "../components/AdditionalPages/Contact";
+import Blog from "../components/AdditionalPages/Blog";
+import BlogPost from "../components/AdditionalPages/BlogPost";
+import HelpSupport from "../components/AdditionalPages/HelpSupport";
+import Privacy from "../components/AdditionalPages/Privacy";
+import Terms from "../components/AdditionalPages/Terms";
+import DonationRequestDetails from "../pages/Home/DonationRequestDetails";
  
 
 
@@ -64,6 +72,38 @@ const router = createBrowserRouter([
       {
         path: "/all-pending-request",
         element: <AllPendingRequest />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogPost />,
+      },
+      {
+        path: "/help-support",
+        element: <HelpSupport />,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />,
+      },
+      {
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/donation-request/:id",
+        element: <DonationRequestDetails />,
       },
       {
         path: "*",

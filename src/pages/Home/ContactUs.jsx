@@ -8,7 +8,7 @@ const ContactUs = () => {
     <section className="py-20 bg-gray-50">
       <div className="w-11/12 max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-[#422ad5]">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#422ad5]">
             Contact Us
           </h2>
           <p className="text-gray-600 mt-3">
@@ -53,21 +53,21 @@ const ContactUs = () => {
             <form className="space-y-5">
               <input
                 type="text"
-                placeholder="Your Name"
+               
                 className="input input-bordered w-full focus:border-[#422ad5]"
                 required
               />
 
               <input
                 type="email"
-                placeholder="Your Email"
+              
                 className="input input-bordered w-full focus:border-[#422ad5]"
                 required
               />
 
               <textarea
                 rows="4"
-                placeholder="Your Message"
+                
                 className="textarea textarea-bordered w-full focus:border-[#422ad5]"
                 required
               ></textarea>

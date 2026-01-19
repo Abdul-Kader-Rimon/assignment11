@@ -8,7 +8,7 @@ const Featured = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="w-11/12 mx-auto text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold  text-[#422ad5]">
+        <h2 className="text-3xl md:text-4xl font-bold  text-[#422ad5]">
           Featured
         </h2>
         <p className="text-gray-600 mt-2">
