@@ -10,7 +10,7 @@ const UrgentRequestsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/search-requests?status=pending')
+    axios.get('https://assignment11-beta.vercel.app/search-requests?status=pending')
       .then(res => {
         setRequests(res.data.slice(0, 6));
         setLoading(false);

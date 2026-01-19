@@ -78,7 +78,7 @@ const Register = () => {
           toast.success("User created successfully!", { id: "create-user" });
 
           axios
-            .post("http://localhost:5000/users", formData)
+            .post("https://assignment11-beta.vercel.app/users", formData)
             .then((res) => {
               console.log(res.data);
             })

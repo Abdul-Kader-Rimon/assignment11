@@ -13,7 +13,7 @@ const DonationRequestDetails = () => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/donation-requests/public/${id}`);
+        const response = await axios.get(`https://assignment11-beta.vercel.app/donation-requests/public/${id}`);
         setRequest(response.data);
       } catch (err) {
         console.error("Error fetching request:", err);

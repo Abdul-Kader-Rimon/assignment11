@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
     if (!user) return;
 
     axios
-      .get(`http://localhost:5000/users/role/${user.email}`)
+      .get(`https://assignment11-beta.vercel.app/users/role/${user.email}`)
       .then((res) => {
         setRole(res.data.role);
         setUserStatus(res.data.status);
